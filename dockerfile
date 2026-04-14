@@ -7,15 +7,15 @@ ENV STEAM_PASSWORD password
 ENV MOD_IDS ()
 ENV UID 1000
 ENV GID 1000
+ENV STEAMAPPDIR "${HOMEDIR}/starbound"
 
-RUN mkdir -p /starbound
-ADD install.sh /starbound/install.sh
+ADD install.sh $HOMEDIR/install.sh
+RUN mkdir -p $STEAMAPPDIR
 
-RUN chown -R $UID:$GID /starbound && chown -R $UID:$GID $STEAMCMDDIR
+RUN chown -R $UID:$GID $STEAMAPPDIR && chmod -R 777 $STEAMCMDDIR
 
-VOLUME ["/starbound"]
 USER $UID:$GID
-RUN chmod u+x /starbound/install.sh
-RUN touch /starbound/installmods.txt
+RUN chmod u+x $HOMEDIR/install.sh
+RUN touch $HOMEDIR/installmods.txt
 
-ENTRYPOINT ["starbound/install.sh"]
+CMD ["bash", "install.sh"]
