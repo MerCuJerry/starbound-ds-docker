@@ -8,13 +8,10 @@ ENV MOD_IDS ()
 ENV UID 1000
 ENV GID 1000
 
-RUN groupadd -g $GID starbound \
-    && useradd -u $UID starbound -g starbound
-
 RUN mkdir -p /starbound
 
-RUN chown -R starbound:starbound /starbound \
-    && chown -R starbound:starbound /home/steam/steamcmd
+RUN chown -R $UID:$GID /starbound \
+    && chown -R $UID:$GID /home/steam/steamcmd
 
 VOLUME ["/starbound"]
 
