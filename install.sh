@@ -1,6 +1,6 @@
 #!/bin/bash
 #Install the Starbound dedicated server
-/steamcmd/steamcmd.sh \
+/home/steam/steamcmd/steamcmd.sh \
     +force_install_dir /starbound/ \
     +login ${STEAM_ACCOUNT} ${STEAM_PASSWORD} \
     +app_update 211820 validate \
@@ -9,21 +9,21 @@
 chmod u+x /starbound/linux/starbound_server
 
 #Build the mod install script
-echo force_install_dir /starbound/ >> /steamcmd/installmods.txt
-echo login ${STEAM_ACCOUNT} ${STEAM_PASSWORD} >> /steamcmd/installmods.txt
+echo force_install_dir /starbound/ >> /starbound/installmods.txt
+echo login ${STEAM_ACCOUNT} ${STEAM_PASSWORD} >> /starbound/installmods.txt
 
 rm /starbound/mods/*
 rm -R /starbound/steamapps
 
 for mod_id in ${MOD_IDS}
 do
-  echo workshop_download_item 211820 $mod_id >> /steamcmd/installmods.txt
+  echo workshop_download_item 211820 $mod_id >> /starbound/installmods.txt
 done
 
-echo quit >> /steamcmd/installmods.txt
+echo quit >> /starbound/installmods.txt
 
 #install Mods
-/steamcmd/steamcmd.sh +runscript installmods.txt
+/home/steam/steamcmd/steamcmd.sh +runscript installmods.txt
 
 #Move all content.pak files from each mod to the mods folder and rename them
 for mod_id in ${MOD_IDS}

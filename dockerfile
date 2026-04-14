@@ -1,4 +1,6 @@
-FROM ubuntu:22.04
+FROM cm2network/steamcmd:latest
+
+USER root
 
 ENV STEAM_ACCOUNT account
 ENV STEAM_PASSWORD password
@@ -13,27 +15,15 @@ RUN apt install software-properties-common lib32gcc-s1 libvorbisfile3 wget libst
 RUN groupadd -g $GID starbound \
     && useradd -u $UID starbound -g starbound
 
-RUN mkdir -p /starbound \
-    && mkdir -p /steamcmd
-
-ADD install.sh /steamcmd/install.sh
+RUN mkdir -p /starbound
 
 RUN chown -R starbound:starbound /starbound \
-    && chown -R starbound:starbound /steamcmd
+    && chown -R starbound:starbound /home/steam/steamcmd
 
 VOLUME ["/starbound"]
 
 USER starbound:starbound
 
-# download and install steamcmd
-RUN cd /steamcmd \
-    && wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz \
-    && tar -zxvf steamcmd_linux.tar.gz \
-    && rm steamcmd_linux.tar.gz \
-    && chmod u+x ./steamcmd.sh
+RUN touch /starbound/installmods.txt
 
-RUN chmod u+x /steamcmd/install.sh
-
-RUN touch /steamcmd/installmods.txt
-
-ENTRYPOINT ["steamcmd/install.sh"]
+ENTRYPOINT ["starbound/install.sh"]
