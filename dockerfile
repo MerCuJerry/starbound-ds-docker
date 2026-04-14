@@ -10,7 +10,7 @@ ADD install.sh $HOMEDIR/install.sh
 RUN mkdir -p $STEAMAPPDIR
 
 USER root
-RUN chown -R "$PUID:$PUID" "$HOMEDIR"
+RUN chown -R "${PUID}:${PUID}" "${HOMEDIR}"
 
 USER $PUID:$PUID
 RUN chmod u+x $HOMEDIR/install.sh
