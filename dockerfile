@@ -1,4 +1,4 @@
-FROM cm2network/steamcmd:latest
+FROM cm2network/steamcmd:root-trixie
 
 USER root
 
@@ -11,13 +11,10 @@ ENV GID 1000
 RUN mkdir -p /starbound
 ADD install.sh /starbound/install.sh
 
-RUN chown -R $UID:$GID /starbound \
-    && chown -R $UID:$GID /home/steam/steamcmd
+RUN chown -R $UID:$GID /starbound && chown -R $UID:$GID $STEAMCMDDIR
 
 VOLUME ["/starbound"]
-
 USER $UID:$GID
-
 RUN chmod u+x /starbound/install.sh
 RUN touch /starbound/installmods.txt
 
