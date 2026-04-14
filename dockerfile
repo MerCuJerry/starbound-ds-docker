@@ -15,7 +15,7 @@ RUN chown -R $UID:$GID /starbound \
 
 VOLUME ["/starbound"]
 
-USER %UID%:%GID%
+USER $UID:$GID
 
 ADD install.sh /starbound/install.sh
 RUN chmod u+x /starbound/install.sh
