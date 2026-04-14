@@ -1,7 +1,5 @@
 FROM cm2network/steamcmd:root-trixie
 
-USER root
-
 ENV STEAM_ACCOUNT account
 ENV STEAM_PASSWORD password
 ENV MOD_IDS ()
@@ -12,7 +10,8 @@ ENV STEAMAPPDIR "${HOMEDIR}/starbound"
 ADD install.sh $HOMEDIR/install.sh
 RUN mkdir -p $STEAMAPPDIR
 
-RUN chown -R $UID:$GID $STEAMAPPDIR && chmod -R 777 $STEAMCMDDIR
+USER root
+RUN chown -R $UID:$GID $STEAMAPPDIR && chown -R $UID:$GID $STEAMCMDDIR && chown $UID:$GID $HOMEDIR/install.sh
 
 USER $UID:$GID
 RUN chmod u+x $HOMEDIR/install.sh
