@@ -1,6 +1,6 @@
 #!/bin/bash
 #Install the Starbound dedicated server
-if ${SKIP_INSTALL} -ne 0
+if ${SKIP_INSTALL} != "false"
 then
   echo "Skipping steamcmd installation and update"
 else
