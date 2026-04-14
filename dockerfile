@@ -9,6 +9,7 @@ ENV UID 1000
 ENV GID 1000
 
 RUN mkdir -p /starbound
+ADD install.sh /starbound/install.sh
 
 RUN chown -R $UID:$GID /starbound \
     && chown -R $UID:$GID /home/steam/steamcmd
@@ -17,7 +18,6 @@ VOLUME ["/starbound"]
 
 USER $UID:$GID
 
-ADD install.sh /starbound/install.sh
 RUN chmod u+x /starbound/install.sh
 RUN touch /starbound/installmods.txt
 
