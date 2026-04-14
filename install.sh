@@ -23,7 +23,7 @@ done
 echo quit >> ${STEAMAPPDIR}/installmods.txt
 
 #install Mods
-${STEAMCMDDIR}/steamcmd.sh +runscript installmods.txt
+${STEAMCMDDIR}/steamcmd.sh +runscript ${STEAMAPPDIR}/installmods.txt
 
 #Move all content.pak files from each mod to the mods folder and rename them
 for mod_id in ${MOD_IDS}
