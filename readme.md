@@ -1,4 +1,4 @@
-# AzureOwl/Starbound-server
+# MerCuJerry/starbound-ds-docker forked from [AzureOwl/Starbound-server](https://github.com/Azure-Owl/starbound-server)
 
 Dockerized starbound server with mod support
 
@@ -10,14 +10,14 @@ The preferred way to use this image is docker-compose:
 version: '2'
   services:
     starbound-server:
-      image: azureowl/starbound-server
+      image: ghcr.io/mercujerry/starbound-ds-docker:main
       container_name: starbound
       environment:
         - STEAM_ACCOUNT=<steamaccountname>
         - STEAM_PASSWORD=<steampassword>
         - MOD_IDS=()
-        - UID=1000
-        - GID=1000
+        - PUID=1000
+        - SKIP_INSTALL=false # change to skip install
       volumes:
         - /path/to/folder:/starbound
       ports:

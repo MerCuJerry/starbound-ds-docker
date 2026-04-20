@@ -1,15 +1,15 @@
 services:
-  starbound_server:
-    image: azureowl/starbound-server:latest
+  starbound-server:
+    image: ghcr.io/mercujerry/starbound-ds-docker:main
     container_name: starbound
-    ports:
-      - 21025:21025/tcp
-    volumes:
-      - /path/to/volume:/starbound
     environment:
-      - STEAM_ACCOUNT=accountname
-      - STEAM_PASSWORD=password
+      - STEAM_ACCOUNT=<steamaccountname>
+      - STEAM_PASSWORD=<steampassword>
       - MOD_IDS=()
-      - UID=1000
-      - GID=1000
+      - PUID=1000
+      - SKIP_INSTALL=false # change to skip install
+    volumes:
+      - /path/to/folder:/starbound
+    ports:
+      - 21025:21025/tcp #default game port
     restart: unless-stopped
